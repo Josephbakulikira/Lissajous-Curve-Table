@@ -9,8 +9,9 @@ class Curve:
     def set_point_y(self, y):
         self.current[1] = y
     def update_points(self):
-
-        self.points.append( ( int(self.current[0]), self.current[1]) )
+        point = (int(self.current[0]), self.current[1]) 
+        if point not in self.points:
+            self.points.append(point )
 
     def draw(self, screen):
         for i in range(len(self.points)):

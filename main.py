@@ -35,9 +35,15 @@ run = True
 while run:
     clock.tick(fps)
     screen.fill(black)
+    
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_ESCAPE:
+                run = False
+
+      
     for i in range(columns):
         a = w+10 + i * w + w//2
         b = w//2 + 15
@@ -61,6 +67,8 @@ while run:
         pygame.draw.circle(screen, white, (int(a+x), int(b+y)), 8)
         for i in range(columns):
             curves[j][i].set_point_y(b+y)
+    
+    
     for x in range(rows):
         for y in range(columns):
             curves[x][y].update_points()
@@ -74,4 +82,5 @@ while run:
         angle = 0
 
     pygame.display.update()
+#pygame.image.save(screen, "screenshot.jpg")
 pygame.quit()
