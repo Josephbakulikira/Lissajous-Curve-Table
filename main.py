@@ -20,12 +20,17 @@ fps = 60
 
 white, black, gray = (245, 245, 245), (15, 15, 15), (150, 150, 150)
 angle = 0
-w = 100
+w = 140
+restart= False
+
 columns = width//w-1
 rows = height// w-1
 speed = 0.01
+
 radius = int((w//2) - 0.1*w)
 curves = [[i for i in range(columns)] for j in range(rows)]
+
+
 
 for x in range(rows):
     for y in range(columns):
@@ -42,6 +47,8 @@ while run:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
                 run = False
+            if event.key == pygame.K_r:
+                restart = True
 
       
     for i in range(columns):
@@ -75,11 +82,12 @@ while run:
             curves[x][y].draw(screen)
 
     angle-= speed
-    if angle < - 2 * math.pi:
+    if angle < - 2 * math.pi or restart == True:
         for x in range(rows):
             for y in range(columns):
                 curves[x][y].points = []
         angle = 0
+        restart = False
 
     pygame.display.update()
 #pygame.image.save(screen, "screenshot.jpg")
